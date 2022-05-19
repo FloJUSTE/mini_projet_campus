@@ -8,6 +8,7 @@ pipeline {
 		IMAGE_TAG = "latest"
 		STAGING = "mini_projet-staging"
 		PRODUCTION = "mini_projet-production"
+		PORT = "80"
 	}
 	agent none
 	stages {
@@ -25,7 +26,7 @@ pipeline {
 			steps {
 				script {
 					sh '''
-						docker run --name $IMAGE_NAME -d -p 80:80 $ID_DOCKER/$IMAGE_NAME:$IMAGE_TAG
+						docker run --name $IMAGE_NAME -d -p 80:80 -e $PORT $ID_DOCKER/$IMAGE_NAME:$IMAGE_TAG
 						sleep 5
 					'''
 				}
